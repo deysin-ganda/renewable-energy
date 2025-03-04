@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Solartec - Renewable Energy Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+   <!-- Spinner Start -->
+   <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->    
+
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-light sticky-top p-0">
+    <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
+        <h2 class="m-0 text-primary">Solvion</h2>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="index.html" class="nav-item nav-link">Home</a>
+            <a href="#about" class="nav-item nav-link">About</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Feature</a>
+                <div class="dropdown-menu bg-light m-0">
+                    <a href="calc.html" class="dropdown-item ">Carbon Footprint <br> Calculator</a>
+                    <a href="rem.html" class="dropdown-item active">Renewable Energy <br> Map</a>
+                    <a href="ccd.html" class="dropdown-item">Climate Change <br> Data</a>
+                </div>
+            </div>
+            <a href="contact.html" class="nav-item nav-link">Contact</a>
+</nav>
+<!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5">
+        <div class="container py-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Features</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Features</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Renewable Energy Map</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Renewable Energy Map -->
+    <div class="container my-5">
+        <h2 class="text-center text-primary mb-4">Global Renewable Energy Map</h2>
+        <p class="text-center">Explore renewable energy sources worldwide.</p>
+
+        <div id="energyMap" style="height: 500px;"></div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-body footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s" id="about">
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-12 text-center mb-3">
+                        &copy; <a href="#">Solvion</a>, All Right Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var map = L.map('energyMap').setView([20, 0], 2.2); // World view
+        
+            // Tile Layer (Map Background)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+        
+            // Renewable Energy Locations
+            var locations = [
+                // Solar Plants ☀️
+                { name: "Noor Solar Plant, Morocco", lat: 31.031, lon: -6.420, type: "solar" },
+                { name: "Ivanpah Solar Plant, USA", lat: 35.568, lon: -115.472, type: "solar" },
+                { name: "Bhadla Solar Park, India", lat: 27.529, lon: 71.998, type: "solar" },
+                { name: "Pavagada Solar Park, India", lat: 14.150, lon: 77.337, type: "solar" },
+                { name: "Huanghe Hydropower Hainan Solar Park, China", lat: 36.100, lon: 101.800, type: "solar" },
+        
+                // Wind Farms 💨
+                { name: "Hornsea Wind Farm, UK", lat: 53.792, lon: 1.872, type: "wind" },
+                { name: "Gansu Wind Farm, China", lat: 40.097, lon: 97.550, type: "wind" },
+                { name: "Alta Wind Energy Center, USA", lat: 35.057, lon: -118.320, type: "wind" },
+                { name: "Whitelee Wind Farm, Scotland", lat: 55.633, lon: -4.333, type: "wind" },
+                { name: "Walney Wind Farm, UK", lat: 54.034, lon: -3.536, type: "wind" },
+        
+                // Philippines 🇵🇭
+                { name: "Calatagan Solar Farm", lat: 13.836, lon: 120.663, type: "solar", country: "Philippines" },
+                { name: "Bangui Wind Farm", lat: 18.542, lon: 120.529, type: "wind", country: "Philippines" },
+                { name: "Agus Hydroelectric Complex", lat: 8.000, lon: 124.300, type: "hydro", country: "Philippines" },
+                { name: "Tiwi Geothermal Power Plant", lat: 13.452, lon: 123.678, type: "geothermal", country: "Philippines" },
+
+                // Hydro Plants 💧
+                { name: "Three Gorges Dam, China", lat: 30.823, lon: 111.003, type: "hydro" },
+                { name: "Itaipu Dam, Brazil/Paraguay", lat: -25.406, lon: -54.588, type: "hydro" },
+                { name: "Hoover Dam, USA", lat: 36.016, lon: -114.737, type: "hydro" },
+        
+                // Geothermal ♨️
+                { name: "The Geysers, USA", lat: 38.786, lon: -122.781, type: "geothermal" },
+                { name: "Hellisheidi Power Station, Iceland", lat: 64.034, lon: -21.349, type: "geothermal" }
+            ];
+        
+            // Custom Icons
+            var icons = {
+                solar: L.icon({ iconUrl: 'img/solar-icon.jpg', iconSize: [30, 30] }),
+                wind: L.icon({ iconUrl: 'img/wind-icon.jpg', iconSize: [30, 30] }),
+                hydro: L.icon({ iconUrl: 'img/hydro-icon.jpg', iconSize: [30, 30] }),
+                geothermal: L.icon({ iconUrl: 'img/geothermal-icon.jpg', iconSize: [30, 30] })
+            };
+        
+            // Add Markers
+            locations.forEach(loc => {
+                L.marker([loc.lat, loc.lon], { icon: icons[loc.type] })
+                    .addTo(map)
+                    .bindPopup(`<b>${loc.name}</b><br>Type: ${loc.type.charAt(0).toUpperCase() + loc.type.slice(1)}`);
+            });
+        });
+        </script>
+</body>
+
+</html>
